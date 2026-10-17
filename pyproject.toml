@@ -1,0 +1,29 @@
+[project]
+name = "devflow-ai"
+version = "0.1.0"
+description = "DevFlow AI: Self-Healing Data Pipeline with Agentic Observability"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    "sqlalchemy",
+    "asyncpg",
+    "alembic",
+    "structlog",
+    "httpx",
+    "pandas",
+    "polars",
+    "pandera",
+    "python-multipart",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

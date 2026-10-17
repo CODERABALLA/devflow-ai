@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-devflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: ${POSTGRES_DB:-devflow}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    restart: unless-stopped
+    command: server -s3 -dir=/data
+    ports:
+      - "8333:8333"   # S3-compatible API — boto3 talks to this
+      - "8888:8888"   # Filer web UI — browse stored files
+    volumes:
+      - seaweedfs_data:/data
+
+volumes:
+  postgres_data:
+  seaweedfs_data:
